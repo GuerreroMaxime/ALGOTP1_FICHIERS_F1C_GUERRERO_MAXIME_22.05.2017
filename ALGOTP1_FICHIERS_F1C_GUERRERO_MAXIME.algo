@@ -1,0 +1,147 @@
+Nom: Programme_verbe_fichier
+But: Permettre de conjuger les verbes et de les stockers dans un fichier
+Entrer: Les verbes
+Sortie: Les verbes conjuger au présent
+
+Constante
+	Max=13;
+
+Type
+  Table=Tableau[1..Max] of chaine;
+
+
+
+Fonction groupe(verbe, Terminaison1, Terminaison2 :chaine de caractere;):entier
+Debut
+    Lire(fiche);
+            Tant que (fiche) faire
+            Debut
+              Lire(fiche,s);
+    		Fin
+
+	De longueur(fiche)=1 a Max alors
+		verbe<-fiche;
+		Maxverbe<-longueur(verbe);
+		Terminaison1<-longueur(verbe)Maxverbe-1;
+		Terminaison2<-longueur(verbe)Maxverbe;
+
+		De longueur(verbe)=1 a longeur(verbe) alors
+		 Si Terminaison1=E et Terminaison=R et verbe<>'ALLER' alors
+		  Debut
+		  	groupe<-1;
+		  FinSi;
+
+		 Si Terminaison1=I et Terminaison=R alors
+		  Debut
+		  	groupe<-2;
+		  FinSi;
+
+		 Sinon
+		  Debut
+		  	groupe<-3;
+		  FinSi;
+
+	Ecrire('Le verbe est du ',groupe,'groupe');
+
+	Fermer(fiche)
+
+FinFonctionn;
+
+
+
+Fonction Conjugaison(:)
+
+Debut
+    Lire(fiche);
+            Tant que (fiche) faire
+            Debut
+              Lire(fiche,s);
+    	  	Fin
+
+    verbe<-fiche;
+    Maxverbe<-longueur(verbe);
+	Terminaison1<-longueur(verbe)Maxverbe-1;
+	Terminaison2<-longueur(verbe)Maxverbe;
+	Terminaison<-longueur(verbe)Maxverbe-2;
+
+    Si groupe=1 alors
+     Debut 
+
+      	Si Terminaison=c alors
+		Debut
+	 		Terminaison=ç;
+		Finsi
+
+      verbeconjug:=longueur(verbe-2);
+      Ter1<-e;
+      Ter2<-es;
+      Ter3<-e;
+      Ter4<-ons;
+      Ter5<-ez;
+      Ter6<-ent;
+
+      Si Terminaison=g alors
+        Debut
+         Ter4<-eons;
+       FinSi
+	FinSi
+
+	Si groupe=2 alors
+     Debut 
+      verbeconjug:=longueur(verbe-2);
+      Ter1<-s;
+      Ter2<-s;
+      Ter3<-t;
+      Ter4<-ssons;
+      Ter5<-ssez;
+      Ter6<-ssent;
+	FinSi
+
+	Si groupe=3 alors
+
+     Debut 
+     Si Terminaison=O alors
+      verbeconjug:=longueur(verbe-3);
+     FinSi
+
+     Si verbe:=ALLER alors
+      Debut
+      verbeconjug:=longueur(verbe-3);
+     FinSi;
+
+      Ter1<-s;
+      Ter2<-s;
+      Ter3<-t;
+      Ter4<-ons;
+      Ter5<-ez;
+      Ter6<-ent;
+	FinSi
+
+  Ecrire(verbejug,Ter1);
+  Ecrire(verbejug,Ter2);
+  Ecrire(verbejug,Ter3);
+  Ecrire(verbejug,Ter4);
+  Ecrire(verbejug,Ter5);
+  Ecrire(verbejug,Ter6);
+
+Fin.
+
+
+Variable
+	fiche:Fichier de texte;
+
+Debut
+	 Assigner(fiche,'Fichier de verbe.txt');
+   Ecrire('Voici les verbes de votre fichier:');
+   Ecrire('');
+     Lire(fiche);
+         Tant que pas la fin de(fiche) do
+         begin
+           ReadLn(fiche,s);
+           WriteLn(s);
+         end;
+            
+  Fermer(fiche);   
+	 groupe();
+	 conugaison();
+Fin.
